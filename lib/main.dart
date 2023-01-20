@@ -14,15 +14,19 @@ class MyApp extends StatelessWidget {
       
             width: double.infinity,
             // color: Colors.black,
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            child: ListView(
+              
+              children: [
+                Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: [
                 BloodBank(), 
                 BloodBank(), 
                 BloodBank(), 
                 ],
-            )),
+            )
+              ],)),
       )),
     );
   }
