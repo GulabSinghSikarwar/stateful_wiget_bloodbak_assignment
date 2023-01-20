@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
 
 class BloodBankDonationDetail extends StatelessWidget {
+  Function increase_blood_units;
+  Function decrease_blood_units;
+  int blood_units;
+
+  BloodBankDonationDetail(
+      {required this.decrease_blood_units,
+      required this.increase_blood_units,
+      required this.blood_units});
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
@@ -73,44 +82,68 @@ class BloodBankDonationDetail extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          Container(
-                            width: 35,
-                            height: 32,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(255, 194, 193, 193)),
-                            child: Center(
-                                child: Text(
-                              "-",
-                              style: TextStyle(
-                                  fontSize: 25, fontWeight: FontWeight.w500),
-                            )),
-                          ),
+                          (blood_units > 0)
+                              ? Container(
+                                  width: 35,
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:
+                                          Color.fromARGB(255, 194, 193, 193)),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:  Color.fromARGB(255, 194, 193, 193)
+                                    ),
+                                    child: Center(
+                                        child: Text(
+                                      "-",
+                                      style: TextStyle(
+                                          fontSize: 25,
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                    onPressed: () {
+                                      decrease_blood_units();
+                                    },
+                                  ),
+                                )
+                              : Container(),
                           Container(
                             padding: EdgeInsets.fromLTRB(20, 5, 20, 5),
                             // color: Color.fromARGB(255, 229, 226, 226),
                             // width: 80,
                             child: Text(
-                              "5",
+                              "$blood_units",
                               style: TextStyle(
                                   color: Colors.black,
                                   fontSize: 25,
                                   fontWeight: FontWeight.w500),
                             ),
                           ),
-                          Container(
-                            width: 35,
-                            height: 32,
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Color.fromARGB(255, 194, 193, 193)),
-                            child: Center(
-                                child: Text(
-                              "+",
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.w500),
-                            )),
-                          ),
+                          (blood_units < 9)
+                              ? Container(
+                                  width: 35,
+                                  height: 32,
+                                  decoration: BoxDecoration(
+                                      borderRadius: BorderRadius.circular(10),
+                                      color:
+                                          Color.fromARGB(255, 194, 193, 193)),
+                                  child: ElevatedButton(
+                                    style: ElevatedButton.styleFrom(
+                                      primary:  Color.fromARGB(255, 194, 193, 193)
+                                    ),
+                                    onPressed: () {
+                                      increase_blood_units();
+                                    },
+                                    child: Center(
+                                        child: Text(
+                                      "+",
+                                      style: TextStyle(
+                                          fontSize: 15,
+                                          fontWeight: FontWeight.w500),
+                                    )),
+                                  ),
+                                )
+                              : Container(),
                         ],
                       ),
                     )

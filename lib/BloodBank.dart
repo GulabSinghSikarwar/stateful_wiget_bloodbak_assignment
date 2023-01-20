@@ -2,7 +2,33 @@ import 'package:flutter/material.dart';
 import 'package:stateful_widget_assesment/BloodBankDonationDetail.dart';
 import 'package:stateful_widget_assesment/BloodBankName.dart';
 
-class BloodBank extends StatelessWidget {
+class BloodBank extends StatefulWidget {
+
+@override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return BloodBankState();
+  }
+}
+
+class BloodBankState extends State{
+  int blood_units=0;
+
+void  increase_blood_units (){
+
+  setState(() {
+    blood_units=blood_units+1;
+    
+  });
+}
+void  decrease_blood_units (){
+
+  setState(() {
+    blood_units=blood_units-1;
+
+  });
+}
+
   Widget build(BuildContext context) {
     return Container(
       padding: EdgeInsets.fromLTRB(5, 0, 0, 0),
@@ -10,14 +36,17 @@ class BloodBank extends StatelessWidget {
       child: Column(children: [
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [BloodBankName(), BloodBankDonationDetail()],
+          children: [BloodBankName(), BloodBankDonationDetail(
+            increase_blood_units:increase_blood_units,
+            decrease_blood_units:decrease_blood_units,
+            blood_units:blood_units)],
         ),
-        LimitReachedBar()
+        ((blood_units==9)?LimitReachedBar():Container())
       ]),
     );
   }
+  
 }
-
 class LimitReachedBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
